@@ -1,0 +1,27 @@
+
+PRODUTO:
+LOAD nome as produto
+	, produto_id
+	, tipo
+	, valor_compra
+	, valor_venda;
+
+SQL SELECT nome,
+    `produto_id`,
+    tipo,
+    `valor_compra`,
+    `valor_venda`
+FROM `curso_q4l`.produto;
+
+VENDAS:
+SQL SELECT `data_venda`,
+    `produto_id`,
+    `quantidade_vendida`,
+    `venda_id`,
+    `vendedor_id`
+FROM `curso_q4l`.vendas;
+
+VENDEDOR:
+SQL SELECT nome as vendedor,
+    `vendedor_id`
+FROM `curso_q4l`.vendedor;

@@ -1,0 +1,10 @@
+META:
+//Caminho relativo
+Directory;
+LOAD Período, 
+     Meta
+FROM
+[..\Fonte\Metas_Q4L.xlsx]
+(ooxml, embedded labels, table is Planilha1);
+STORE META into ..\Dados\meta.qvd(QVD);
+DROP TABLE META;

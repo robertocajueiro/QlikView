@@ -1,0 +1,43 @@
+VENDAS_TRANSFORMACAO:
+LOAD data_venda, 
+     produto_id, 
+     quantidade_vendida, 
+     venda_id, 
+     vendedor_id
+FROM
+[..\Dados\vendas.qvd]
+(qvd);
+JOIN(VENDAS_TRANSFORMACAO)
+
+LOAD produto_id,  
+     valor_compra, 
+     valor_venda
+FROM
+[..\Dados\produto.qvd]
+(qvd);
+
+//Faturamento por venda (quantidade_vendida x valor_venda)
+//Custo por venda (quantidade_vendida x valor_compra)
+//Margem por venda faturamento - Custo por venda
+
+VENDAS:
+LOAD *,
+	faturamento_venda - custo_venda AS margem
+	
+	;
+
+LOAD data_venda, 
+     produto_id, 
+     quantidade_vendida, 
+     venda_id, 
+     vendedor_id,
+     valor_compra, 
+     valor_venda,
+     quantidade_vendida * valor_venda AS faturamento_venda,
+     quantidade_vendida * valor_compra AS custo_venda
+Resident VENDAS_TRANSFORMACAO;  
+
+DROP TABLE VENDAS_TRANSFORMACAO;
+
+STORE VENDAS into ..\Dados\vendas_transformado.qvd(QVD);
+//DROP TABLE VENDAS;   
